@@ -56,13 +56,13 @@ def sign_in():
 
         user = User.query.filter_by(email=email).first()
         if not user:
-            flash('Invalid username or password', 'error')
-            return redirect(url_for('login'))
+            flash('Invalid email or password', 'error')
+            return redirect(url_for('sign_in'))
 
         # Check if the password is correct
         if not check_password_hash(user.password, password):
-            flash('Invalid username or password', 'error')
-            return redirect(url_for('login'))
+            flash('Invalid email or password', 'error')
+            return redirect(url_for('sign_in'))
 
         login_user(user)
         
@@ -80,9 +80,9 @@ def sign_up():
         if len(password) < 8 or not any(char.isupper() for char in password) or not any(char.isdigit() for char in password):
             flash('Password must be at least 8 characters long and contain at least one uppercase letter and one digit', 'error')
             return redirect(url_for('sign_up'))
-        existing_user = User.query.filter_by(name=name).first()
+        existing_user = User.query.filter_by(email=email).first()
         if existing_user:
-            flash('use another name', 'error')
+            flash('use another email', 'error')
             return redirect(url_for('sign_up'))
         hashed_password = generate_password_hash(password)
         new_user = User(name=name, password=hashed_password, email=email)
