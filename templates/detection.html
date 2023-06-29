@@ -3,34 +3,55 @@
 {% block title %} Photos Page {% endblock %}
 
 {% block content %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Photo Example</title>
     <style>
-        /* Center-align the photo */
+        /* Custom CSS styles */
+
         .photo-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: 80vh;
         }
 
-        /* Add some styling to the photo */
         .photo-container img {
             max-width: 100%;
             max-height: 100%;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
+
+        .download-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .download-section h1 {
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .download-link {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .download-link:hover {
+            background-color: #0056b3;
+        }
     </style>
-</head>
-<body>
+
     <div class="photo-container">
         <img src="static/result.png" alt="My Photo">
     </div>
-    <h1>download photo</h1>
-    <a href="static/result.png" download>Download Photo</a>
-</body>
-</html>
+
+    <div class="download-section">
+        <h1>Download Photo</h1>
+        <a href="static/result.png" download class="download-link">Download</a>
+    </div>
 {% endblock %}

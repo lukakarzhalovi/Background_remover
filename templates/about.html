@@ -1,15 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} About - Remove.bg{%endblock%}</title>
-</head>
-<body>
+    <style>
+        /* Custom CSS styles */
+
+        /* About Section */
+        h3 {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: normal;
+            line-height: 1.5;
+        }
+    </style>
+
     <h3>This is a site where the user can upload any photo and cut out its background, and it has the ability to recognize the objects in the photo with the help of artificial intelligence, computer vision.</h3>
-    
-</body>
-</html>
 {% endblock %}

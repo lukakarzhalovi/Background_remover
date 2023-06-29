@@ -1,21 +1,50 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} Home - Remove.bg{%endblock%}</title>
-</head>
-<body>
+    <style>
+        /* Custom CSS styles */
+
+        /* Page Heading */
+        h1 {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Upload Form */
+        form {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        input[type="file"] {
+            display: block;
+            margin: 0 auto;
+            width: 200px;
+            padding: 10px;
+        }
+
+        input[type="submit"] {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+    {% if 'username' not in session %}
+    <h1>Please register first</h1>
+    {% endif %}
+    {% if 'username' in session %}
     <h1>Upload an Image</h1>
-    {% if 'username'  in session %}
+
     <form method="POST" enctype="multipart/form-data">
         <input type="file" name="image" accept="image/*" required>
         <br><br>
         <input type="submit" value="Upload">
     </form>
     {% endif %}
-</body>
-</html>
 {% endblock %}

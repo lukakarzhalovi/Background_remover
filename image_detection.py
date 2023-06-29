@@ -20,7 +20,7 @@ def object_detenction_on_video():
     mysegmentVideo.load_model("pointrend_resnet50.pkl")
 
     mysegmentVideo.process_video(
-        video_path= 'car.mp4',
+        video_path= 'example.mp4',
         show_bboxes= True,
         frames_per_second = 15,
         output_video_name = 'car_sec.mp4'

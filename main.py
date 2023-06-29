@@ -7,8 +7,6 @@ from flask_login import LoginManager, UserMixin, login_user,logout_user,login_re
 import shutil
 import re
 
-
-
 api = API_remove
 app = Flask(__name__)
 app.secret_key = 'user_secret_key'

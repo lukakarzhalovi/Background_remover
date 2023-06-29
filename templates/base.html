@@ -1,62 +1,100 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Background Remover{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>{% block title %} Background Remover {%endblock%}</title>
+    <style>
+        /* Custom CSS styles */
+
+        /* Navbar */
+        .navbar {
+            padding: 10px;
+        }
+
+        .navbar-brand img {
+            margin-right: 10px;
+        }
+
+        /* Navigation Links */
+        .nav-link {
+            color: #333;
+            font-weight: bold;
+            margin: 0 10px;
+        }
+
+        .nav-link.active {
+            color: #007bff;
+        }
+
+        /* Flash Messages */
+        .flash-messages {
+            margin-top: 20px;
+        }
+
+        .flash-messages .alert {
+            margin-top: 10px;
+        }
+
+        /* Container */
+        .container {
+            margin-top: 30px;
+        }
+    </style>
 </head>
 <body>
-  <nav class="navbar navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="home">
-        <img src="static/logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
-        Background Remover
-      </a>
-    </div>
-  </nav>
-  <ul class="nav justify-content-center">
-    <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="home">Home</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="about">About</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link " href="ImageDetection" >Image Detection</a>
-    </li>
-    {% if 'username' not in session %}
-    <li class="nav-item">
-      <a class="nav-link" href="Log in">Log in</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link " href="Sign up" >Sign up</a>
-    </li>
-    {% endif %}
-    {% if 'username'  in session %}
-    <li class="nav-item">
-      <a class="nav-link " href="log out" >log out</a>
-    </li>
-    {% endif %}
-  </ul>
-
-  <div class="container">
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <div class="row justify-content-center">
-          <div class="col-md-12">
-            <div class="alert alert-danger mt-3">
-              <ul class="mb-0" style="list-style-type: none; padding-left: 0;">
-                {% for message in messages %}
-                  <li style="margin-top: 10px;">{{ message }}</li>
-                {% endfor %}
-              </ul>
-            </div>
-          </div>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="home">
+                <img src="static/logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+                Background Remover
+            </a>
         </div>
-      {% endif %}
-    {% endwith %}
-  
-    {% block content %}{% endblock %}
-  </div>
+    </nav>
+
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="home">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="about">About</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="ImageDetection">Image Detection</a>
+        </li>
+        {% if 'username' not in session %}
+        <li class="nav-item">
+            <a class="nav-link" href="Log in">Log in</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="Sign up">Sign up</a>
+        </li>
+        {% endif %}
+        {% if 'username' in session %}
+        <li class="nav-item">
+            <a class="nav-link" href="log out">Log out</a>
+        </li>
+        {% endif %}
+    </ul>
+
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="row justify-content-center flash-messages">
+            <div class="col-md-12">
+                <div class="alert alert-danger mt-3">
+                    <ul class="mb-0" style="list-style-type: none; padding-left: 0;">
+                        {% for message in messages %}
+                        <li style="margin-top: 10px;">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
 </body>
-</html>
