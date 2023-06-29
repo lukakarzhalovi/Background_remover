@@ -21,8 +21,8 @@ class API_remove():
         return result_path
 
 # Example usage
-image_path = "static/person.jpeg"
-api_key = "Vs5BJEfznmo4cdZ9cJP9EZ2M"
+# image_path = "static/person.jpeg"
+# api_key = "Vs5BJEfznmo4cdZ9cJP9EZ2M"
 # result_image_path = API_remove.remove_background(image_path, api_key)
 
 # Move or use the result image as needed

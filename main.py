@@ -5,6 +5,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user,logout_user,login_required,current_user
 import re
 
+
+api = API_remove
 app = Flask(__name__)
 app.secret_key = 'user_secret_key'
 app.config['SQLALCHEMY_BINDS'] = {'users': 'sqlite:///usersdatabse.db'}
@@ -37,9 +39,24 @@ def load_users(user_id):
 
 db.create_all()
 
-@app.route("/")
-@app.route("/home")
+@app.route("/" ,  methods = ["POST", "GET" ])
+@app.route("/home" ,  methods = ["POST", "GET" ])
 def home():
+    if request.method == 'POST':
+        # Check if a file was uploaded in the request
+        if 'image' in request.files:
+            image = request.files['image']
+            print(image)
+            # Save the uploaded image to a desired location
+            # image.save('path/to/save/image.jpg')
+            # Perform any further processing on the image if required
+            api_key = "Vs5BJEfznmo4cdZ9cJP9EZ2M"
+            result = api.remove_background(image_path=image, api_key=api_key)
+            print(result)
+            # Return a response or redirect to another page
+            return result
+    
+    # Render the HTML template with the file upload form
     return render_template('home.html')
 
 @app.route("/about")
