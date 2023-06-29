@@ -1,9 +1,12 @@
 from flask import Flask, request, render_template, redirect ,url_for, session,flash
 from flask_sqlalchemy import SQLAlchemy
 from API import API_remove
+from image_detection import object_detenction_on_image
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user,logout_user,login_required,current_user
+import shutil
 import re
+
 
 
 api = API_remove
@@ -43,20 +46,21 @@ db.create_all()
 @app.route("/home" ,  methods = ["POST", "GET" ])
 def home():
     if request.method == 'POST':
-        # Check if a file was uploaded in the request
         if 'image' in request.files:
             image = request.files['image']
-            print(image)
-            # Save the uploaded image to a desired location
-            # image.save('path/to/save/image.jpg')
-            # Perform any further processing on the image if required
+            # შევინახოთ დროებით ლოკაციაზე
+            image_path = 'static/uploaded_image.png'
+            image.save(image_path)
+
+            #ეიპიასი მეშვეობთ ამოვჭრათ სურათის ბექგრაუნდი
             api_key = "Vs5BJEfznmo4cdZ9cJP9EZ2M"
-            result = api.remove_background(image_path=image, api_key=api_key)
-            print(result)
-            # Return a response or redirect to another page
-            return result
+            result_image_path = api.remove_background(image_path, api_key)
+
+            # შევინახოთ აწ უკვე ამოჭრილი ფოტო სადაც გვინდა
+            shutil.move(result_image_path, "static/result.png")
+
+            return render_template("b_remove.html")
     
-    # Render the HTML template with the file upload form
     return render_template('home.html')
 
 @app.route("/about")
@@ -73,16 +77,15 @@ def sign_in():
 
         user = User.query.filter_by(email=email).first()
         if not user:
-            flash('Invalid username or password', 'error')
-            return redirect(url_for('login'))
+            flash('Invalid email or password', 'error')
+            return redirect(url_for('sign_in'))
 
         # Check if the password is correct
         if not check_password_hash(user.password, password):
-            flash('Invalid username or password', 'error')
-            return redirect(url_for('login'))
-
-        login_user(user)
-        
+            flash('Invalid email or password', 'error')
+            return redirect(url_for('sign_in'))
+   
+        session['username'] = user.email
         return redirect(url_for('home'))
     
     return render_template('Log in.html')
@@ -97,9 +100,9 @@ def sign_up():
         if len(password) < 8 or not any(char.isupper() for char in password) or not any(char.isdigit() for char in password):
             flash('Password must be at least 8 characters long and contain at least one uppercase letter and one digit', 'error')
             return redirect(url_for('sign_up'))
-        existing_user = User.query.filter_by(name=name).first()
+        existing_user = User.query.filter_by(email=email).first()
         if existing_user:
-            flash('use another name', 'error')
+            flash('use another email', 'error')
             return redirect(url_for('sign_up'))
         hashed_password = generate_password_hash(password)
         new_user = User(name=name, password=hashed_password, email=email)
@@ -107,13 +110,27 @@ def sign_up():
         db.session.add(new_user)
         db.session.commit()
 
-        return redirect(url_for('home'))
+        return redirect(url_for('Log in'))
 
     return render_template('Sign up.html')
 
-@app.route("/ImageDetection")
+@app.route("/ImageDetection",methods=["POST", "GET"])
 def Image_det():
+    if request.method == 'POST':
+        if 'image' in request.files:
+            image = request.files['image']
+            image_path = 'static/uploaded_image.png'
+            image.save(image_path)
+            object_detenction_on_image()
+            return render_template('detection.html')
+
     return render_template('ImageDetection.html')
+
+@app.route("/log out")
+def log_out():
+    session.pop('username', None)
+    return render_template('home.html')
+
 
 
 if __name__ == "__main__":

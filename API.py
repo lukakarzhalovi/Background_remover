@@ -1,5 +1,4 @@
 import requests
-import shutil
 
 class API_remove():
 
@@ -19,11 +18,3 @@ class API_remove():
             f.write(response.content)
 
         return result_path
-
-# Example usage
-# image_path = "static/person.jpeg"
-# api_key = "Vs5BJEfznmo4cdZ9cJP9EZ2M"
-# result_image_path = API_remove.remove_background(image_path, api_key)
-
-# Move or use the result image as needed
-# shutil.move(result_image_path, "3.webp")

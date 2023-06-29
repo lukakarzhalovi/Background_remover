@@ -4,17 +4,16 @@ from pixellib.torchbackend.instance import instanceSegmentation
 def object_detenction_on_image():
     mysegmentImage = instanceSegmentation()
     mysegmentImage.load_model("pointrend_resnet50.pkl")
-    target_class = mysegmentImage.select_target_classes(cat = True)
+    target_class = mysegmentImage.select_target_classes()
 
-    result = mysegmentImage.segmentImage( #aqvs ori aucilebeli parametri
-        image_path = "2.png",
-        # show_bboxes= True,
+    result = mysegmentImage.segmentImage( #აქვს ორი აუცილებელი პარამეტრი
+        image_path = "static/uploaded_image.png",
+        show_bboxes= True,
         # extract_segmented_objects= True,
         # save_extracted_objects= True,
-        segment_target_classes = target_class,
-        output_image_name = "2_post.png"
+        # segment_target_classes = target_class,
+        output_image_name = "static/result.png"
     )
-    print(len(result[0]['scores']))
 
 def object_detenction_on_video():
     mysegmentVideo = instanceSegmentation()
@@ -27,9 +26,6 @@ def object_detenction_on_video():
         output_video_name = 'car_sec.mp4'
     )
 
-def main():
-    object_detenction_on_image()
-    # object_detenction_on_video()
-
-if __name__ == "__main__":
-    main()
+# def main():
+#     object_detenction_on_image()
+#     # object_detenction_on_video()

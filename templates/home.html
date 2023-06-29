@@ -10,9 +10,11 @@
 <body>
     <h1>Upload an Image</h1>
     <form method="POST" enctype="multipart/form-data">
+        {% if 'username'  in session %}
         <input type="file" name="image" accept="image/*" required>
         <br><br>
         <input type="submit" value="Upload">
+        {% endif %}
     </form>
 </body>
 </html>
