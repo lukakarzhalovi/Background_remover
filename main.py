@@ -110,7 +110,7 @@ def sign_up():
         db.session.add(new_user)
         db.session.commit()
 
-        return redirect(url_for('Log in'))
+        return redirect(url_for('sign_in'))
 
     return render_template('Sign up.html')
 
