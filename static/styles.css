@@ -1,0 +1,155 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    align-items: center;
+    box-shadow: 0px 2px rgba(0, 0, 0, 0.2);
+}
+.loginin{
+    border: none;
+    background-color: transparent;
+    color: #000;
+    font-size: 18px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    cursor: pointer;
+    padding: 5px;
+}
+.signup{
+    border-radius: 40px;
+    background: #E8E2E2;
+    color: #000;
+    font-size: 18px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 751;
+    line-height: normal;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+.content{
+    display: flex;
+    padding: 30px 0px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.right{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 1px 1px 8px black;
+    border-radius: 20px;
+    justify-content: center;
+    padding: 0px 10px;
+    height: 300px;
+}
+input[type="file"]{
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 21px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 50px;
+}
+.choose::-webkit-file-upload-button {
+    border-radius: 70px;
+    background: #5F6B8C;
+    border:none;
+    color: #000;
+    font-size: 21px;
+    font-family: Roboto;
+    font-style: normal;
+    line-height: normal;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+.left{
+    display: flex;
+    width: 400px;
+    flex-direction: column;
+
+}
+
+.title{
+    color: #5F6B8C;
+    font-size: 40px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+.desc{
+    color: #000000;
+    font-size: 24px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.upload{
+    border-radius: 70px;
+    background: #5F6B8C;
+    border:none;
+    color: #000;
+    font-size: 38px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    padding: 20px 40px;
+    cursor: pointer;
+}
+
+.diss_image{
+    height: 350px;
+    width: 350px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url(p1.jpeg);
+    transition-duration: 2s;
+}
+.diss_image:hover{
+    
+    background-image: url(p2.png);
+}
+
+footer{
+    background-color:#5F6B8C;;
+    padding: 40px 20px 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 38px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 700;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    
+}
+.aboutus{
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+}
+
+
+.edited{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
